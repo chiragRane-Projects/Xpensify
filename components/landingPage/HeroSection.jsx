@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
+
 const DigitalClock = () => {
   const [time, setTime] = useState('')
 
@@ -73,7 +74,7 @@ const HeroSection = () => {
         >
           <Link href="/login">
             <Button
-              className="bg-cyan-600 text-white font-semibold text-lg px-6 py-3 rounded-xl hover:bg-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="bg-cyan-600 cursor-pointer text-white font-semibold text-lg px-6 py-3 rounded-xl hover:bg-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Get Started
             </Button>
