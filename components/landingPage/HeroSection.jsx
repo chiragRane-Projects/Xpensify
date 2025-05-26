@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ThemeButton } from '../manualUi/ThemeButton'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
@@ -26,7 +25,7 @@ const DigitalClock = () => {
 
   return (
     <motion.div
-      className="text-cyan-500 font-orbitron font-bold text-xl md:text-3xl bg-background/95 backdrop-blur-md px-6 py-4 rounded-2xl shadow-2xl border border-cyan-200/50 hover:border-cyan-600/70 transition-all duration-300"
+      className="text-cyan-500 font-orbitron font-bold text-xl md:text-3xl"
       initial={{ scale: 1, opacity: 0.8 }}
       animate={{ scale: 1, opacity: 1 }}
       whileHover={{ scale: 1.05 }}
@@ -47,7 +46,6 @@ const HeroSection = () => {
     >
       <div className="flex items-start justify-between">
         <DigitalClock />
-        <ThemeButton />
       </div>
       <div className="flex-1 flex flex-col items-center justify-center text-center gap-4">
         <motion.h2

@@ -1,6 +1,6 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/Providers/theme-providers";
+import SessionProvider from "@/Providers/Session-Providers";
 
 const poppins = Poppins({
   variable: "--font-geist-sans",
@@ -22,14 +22,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${poppins.className} antialiased`}
       >
-        <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+       
+          <SessionProvider>
+            {children}
+          </SessionProvider>
       </body>
     </html>
   );
