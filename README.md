@@ -1,5 +1,7 @@
 # 💸 Xpensify – Smart Expense Tracker
 
+**Live Preview**: https://xpensify-six.vercel.app/
+
 Take control of your money with **Xpensify**, a minimal, elegant expense tracker that turns your spending data into visual insights. Whether you're budgeting for the month or just tracking daily costs, Xpensify keeps it simple, stylish, and smart.
 
 ---
@@ -25,12 +27,6 @@ Take control of your money with **Xpensify**, a minimal, elegant expense tracker
 - **NextAuth.js** – authentication made easy
 
 ---
-
-## 📈 Visual Reports
-
-- **Category-wise Pie Chart** – See where your money actually goes
-- **Weekly Bar Graph** – Spot spending spikes and trends easily
-- **Excel Reports** - All your reports can be exported in an Excel format
 
 
 ## 🎯 Goals
