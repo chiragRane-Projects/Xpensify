@@ -15,18 +15,16 @@ const ExpenseSection = () => {
   const [filteredExpenses, setFilteredExpenses] = useState([])
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10)) 
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [weekFilter, setWeekFilter] = useState('current')
 
-  // Fetch expenses when authenticated
   useEffect(() => {
     if (status === 'authenticated') {
       fetchExpenses()
     }
   }, [status])
 
-  // Filter expenses when weekFilter or expenses change
   useEffect(() => {
     filterExpenses()
   }, [weekFilter, expenses])
@@ -73,8 +71,8 @@ const ExpenseSection = () => {
         toast.success(data.message)
         setAmount('')
         setDescription('')
-        setDate(new Date().toISOString().slice(0, 10)) // Reset to today
-        await fetchExpenses() // Refresh expenses
+        setDate(new Date().toISOString().slice(0, 10))
+        window.location.reload() // Force reload page to show updates
       } else {
         toast.error(data.error || 'Failed to save expense')
       }
@@ -86,19 +84,17 @@ const ExpenseSection = () => {
     }
   }
 
-  // Get start and end of a week (Monday to Sunday)
   const getWeekRange = (weeksBack = 0) => {
     const now = new Date()
-    // Adjust to Monday of the target week
-    const day = now.getDay() || 7 // Convert Sunday (0) to 7
+    const day = now.getDay() || 7
     const daysToMonday = day - 1
     const start = new Date(now)
     start.setDate(now.getDate() - daysToMonday - weeksBack * 7)
-    start.setHours(0, 0, 0, 0) // Start of day
+    start.setHours(0, 0, 0, 0)
 
     const end = new Date(start)
     end.setDate(start.getDate() + 6)
-    end.setHours(23, 59, 59, 999) // End of day
+    end.setHours(23, 59, 59, 999)
 
     return { start, end }
   }
@@ -120,18 +116,16 @@ const ExpenseSection = () => {
     setFilteredExpenses(filtered)
   }
 
-  // Format date for display (e.g., "27 May 2025")
   const formatDate = (dateStr) => {
     try {
       const date = new Date(dateStr)
       const options = { day: '2-digit', month: 'short', year: 'numeric' }
       return date.toLocaleDateString('en-IN', options).replace(/,/, '')
     } catch {
-      return dateStr // Fallback
+      return dateStr
     }
   }
 
-  // Week filter options
   const weekOptions = [
     { value: 'current', label: 'This Week' },
     { value: '1', label: 'Last Week' },
@@ -157,12 +151,17 @@ const ExpenseSection = () => {
 
   return (
     <motion.div
-      className="min-h-[500px] bg-gradient-to-br from-white to-cyan-200 px-6 py-12 flex flex-col items-center"
+      className="min-h-[500px] bg-gradient-to-br from-white to-cyan-200 px-6 py-12 flex flex-col items-center relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Heading */}
+      {isSubmitting && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/70 backdrop-blur-sm">
+          <div className="w-12 h-12 border-4 border-cyan-600 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
+
       <motion.h2
         className="font-[family-name:var(--font-geist-sans)] font-medium text-2xl md:text-4xl text-cyan-900 mb-10 text-center"
         initial={{ y: 20, opacity: 0 }}
@@ -187,8 +186,8 @@ const ExpenseSection = () => {
             placeholder="Enter amount (₹)"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="font-[family-name:var(--font-geist-sans)] text-cyan-900 bg-white border-cyan-300 focus:border-cyan-500 rounded-lg text-base"
-            aria-label="Expense amount in Indian Rupees"
+            className="text-cyan-900 bg-white border-cyan-300 focus:border-cyan-500 rounded-lg text-base"
+            aria-label="Expense amount"
             min="0"
             step="0.01"
             disabled={isSubmitting || status === 'loading'}
@@ -198,7 +197,7 @@ const ExpenseSection = () => {
             placeholder="Enter description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="font-[family-name:var(--font-geist-sans)] text-cyan-900 bg-white border-cyan-300 focus:border-cyan-500 rounded-lg text-base"
+            className="text-cyan-900 bg-white border-cyan-300 focus:border-cyan-500 rounded-lg text-base"
             aria-label="Expense description"
             disabled={isSubmitting || status === 'loading'}
           />
@@ -206,21 +205,21 @@ const ExpenseSection = () => {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="font-[family-name:var(--font-geist-sans)] text-cyan-900 bg-white border-cyan-300 focus:border-cyan-500 rounded-lg text-base"
+            className="text-cyan-900 bg-white border-cyan-300 focus:border-cyan-500 rounded-lg text-base"
             aria-label="Expense date"
             disabled={isSubmitting || status === 'loading'}
           />
           <Button
             type="submit"
             disabled={isSubmitting || status === 'loading'}
-            className="bg-cyan-600 text-white font-[family-name:var(--font-geist-sans)] font-medium py-3 rounded-lg hover:bg-cyan-700 transition-all duration-300 shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
+            className="bg-cyan-600 text-white font-medium py-3 rounded-lg hover:bg-cyan-700 transition-all duration-300 shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
             {isSubmitting ? 'Saving...' : 'Add Expense'}
           </Button>
         </div>
       </motion.form>
 
-      {/* Filter and Expense Cards */}
+      {/* Filter & Expense Cards */}
       <motion.div
         className="w-full max-w-5xl"
         initial={{ y: 20, opacity: 0 }}
@@ -228,7 +227,7 @@ const ExpenseSection = () => {
         transition={{ delay: 0.6, duration: 0.5 }}
       >
         <div className="flex justify-between items-center mb-6">
-          <h3 className="font-[family-name:var(--font-geist-sans)] font-medium text-lg md:text-xl text-cyan-900">
+          <h3 className="text-lg md:text-xl text-cyan-900 font-medium">
             Your Expenses
           </h3>
           <Select value={weekFilter} onValueChange={setWeekFilter}>
@@ -240,7 +239,7 @@ const ExpenseSection = () => {
                 <SelectItem
                   key={option.value}
                   value={option.value}
-                  className="font-[family-name:var(--font-geist-sans)] text-cyan-900 hover:bg-cyan-100"
+                  className="text-cyan-900 hover:bg-cyan-100"
                 >
                   {option.label}
                 </SelectItem>
@@ -252,7 +251,7 @@ const ExpenseSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredExpenses.length === 0 ? (
             <motion.p
-              className="font-[family-name:var(--font-geist-sans)] text-cyan-700 text-center text-base md:text-lg col-span-full"
+              className="text-cyan-700 text-center text-base md:text-lg col-span-full"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.5 }}
@@ -269,10 +268,10 @@ const ExpenseSection = () => {
                 whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
               >
                 <Card className="bg-background/95 backdrop-blur-md text-cyan-900 p-6 rounded-xl shadow-xl border border-cyan-200/50 hover:border-cyan-600/70 transition-all duration-300">
-                  <CardTitle className="font-[family-name:var(--font-geist-sans)] font-medium text-lg mb-2">
+                  <CardTitle className="text-lg mb-2 font-medium">
                     ₹{expense.amount.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
                   </CardTitle>
-                  <CardDescription className="font-[family-name:var(--font-geist-sans)] font-normal text-base">
+                  <CardDescription className="text-base">
                     <p>{expense.description}</p>
                     <p className="text-sm mt-1">{formatDate(expense.date)}</p>
                   </CardDescription>
