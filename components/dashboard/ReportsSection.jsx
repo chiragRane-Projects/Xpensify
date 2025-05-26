@@ -87,20 +87,7 @@ const ReportsSection = () => {
       return dateStr
     }
   }
-
-  // Export expenses to Excel
-  const exportToExcel = () => {
-    const exportData = expenses.map((expense) => ({
-      Date: formatDate(expense.date),
-      Amount: expense.amount,
-      Description: expense.description,
-    }))
-    const worksheet = XLSX.utils.json_to_sheet(exportData)
-    const workbook = XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Expenses')
-    XLSX.write_file(workbook, 'Xpensify_Expenses.xlsx')
-  }
-
+  
   // Custom Tooltip for BarChart
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -203,25 +190,6 @@ const ReportsSection = () => {
             {' '} | Total Expenses: ₹{totalExpenses.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
           </p>
         </Card>
-      </motion.div>
-
-      {/* Export to Excel */}
-      <motion.div
-        className="w-full max-w-5xl"
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.5 }}
-      >
-        <h3 className="font-[family-name:var(--font-geist-sans)] font-medium text-lg md:text-xl text-cyan-900 mb-4">
-          Export Expenses
-        </h3>
-        <Button
-          onClick={exportToExcel}
-          disabled={expenses.length === 0 || status === 'loading'}
-          className="bg-cyan-600 text-white font-[family-name:var(--font-geist-sans)] font-medium py-3 rounded-lg hover:bg-cyan-700 transition-all duration-300 shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
-        >
-          Export to Excel
-        </Button>
       </motion.div>
     </motion.div>
   )
