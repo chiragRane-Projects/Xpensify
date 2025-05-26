@@ -1,8 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 💸 Xpensify – Smart Expense Tracker
 
-## Getting Started
+Take control of your money with **Xpensify**, a minimal, elegant expense tracker that turns your spending data into visual insights. Whether you're budgeting for the month or just tracking daily costs, Xpensify keeps it simple, stylish, and smart.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- 🔐 **Google/GitHub Login** (via NextAuth)
+- 🧮 **Set Monthly Budget**
+- ➕ **Add & Categorize Expenses**
+- 📊 **Pie Chart** for category-wise breakdown
+- 📅 **Bar Graph** for weekly expense trends
+- ⚡️ **Fast, responsive UI** with smooth animations
+
+---
+
+## 🛠️ Tech Stack
+
+- **Next.js 15 App Router (JavaScript)** – full-stack framework
+- **MongoDB Atlas** – cloud-based database
+- **Tailwind CSS** – utility-first styling
+- **Framer Motion** – silky smooth animations
+- **Shadcn UI** – accessible, beautiful components
+- **NextAuth.js** – authentication made easy
+
+---
+
+## 📈 Visual Reports
+
+- **Category-wise Pie Chart** – See where your money actually goes
+- **Weekly Bar Graph** – Spot spending spikes and trends easily
+- **Excel Reports** - All your reports can be exported in an Excel format
+
+
+## 🎯 Goals
+
+Built in **4–5 days** as a fast-paced, full-stack project to simulate a real-world MVP scenario. Xpensify focuses on:
+- Clean UX and elegant UI
+- Real-world functionality (auth, CRUD, data viz)
+- Frontend + backend integration
+- Deploy-ready quality
+
+## 🧑‍💻 Author
+
+Built with ☕, 🎧, and too many tabs open by **[Chirag Vaibhav Rane]**.
+
+---
+
+First, clone the repository:
+
+git clone https://github.com/chiragRane-Projects/Xpensify.git
+
+cd Xpensify
 
 ```bash
 npm run dev
@@ -15,22 +64,3 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
