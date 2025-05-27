@@ -11,7 +11,6 @@ Take control of your money with **Xpensify**, a minimal, elegant expense tracker
 - 🔐 **Google/GitHub Login** (via NextAuth)
 - 🧮 **Set Monthly Budget**
 - ➕ **Add & Categorize Expenses**
-- 📊 **Pie Chart** for category-wise breakdown
 - 📅 **Bar Graph** for weekly expense trends
 - ⚡️ **Fast, responsive UI** with smooth animations
 
